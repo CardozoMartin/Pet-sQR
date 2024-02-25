@@ -1,0 +1,53 @@
+## Documentación del Proyecto
+
+### Nombre del Proyecto: PetQR
+
+### Descripción:
+PetQR es una aplicación web diseñada para ayudar a los propietarios de mascotas a gestionar la información de sus animales de compañía de manera conveniente. Permite a los usuarios registrar sus mascotas junto con detalles como nombre, tipo, raza, edad y una foto. Además, la aplicación genera un código QR único para cada mascota, que puede ser escaneado para acceder a la información de la mascota y del propietario asociado.
+
+### Tecnologías Utilizadas:
+- Frontend: React.js
+- Backend: Node.js con Express.js
+- Base de Datos: MongoDB
+- Generación de Códigos QR: Biblioteca `qrcode` en Node.js
+- Autenticación de Usuarios: JSON Web Tokens (JWT)
+
+### Funcionalidades Principales:
+1. **Registro de Usuarios**:
+   - Los usuarios pueden registrarse en la aplicación proporcionando su nombre, apellido, dirección, número de teléfono, correo electrónico y WhatsApp.
+
+2. **Inicio de Sesión**:
+   - Los usuarios registrados pueden iniciar sesión en la aplicación utilizando su correo electrónico y contraseña.
+
+3. **Gestión de Mascotas**:
+   - Una vez autenticado, el usuario puede agregar mascotas a su cuenta.
+   - Para cada mascota, el usuario puede proporcionar detalles como nombre, tipo, raza, edad y una foto.
+   - Se genera automáticamente un código QR único para cada mascota agregada.
+
+4. **Visualización de Información de Mascotas**:
+   - Los usuarios pueden ver la información detallada de cada una de sus mascotas, incluyendo su foto, nombre, tipo, raza y edad.
+   - Además, se muestra la información del propietario asociado, como nombre, correo electrónico, número de teléfono y dirección.
+
+5. **Descarga de Código QR**:
+   - Los usuarios tienen la opción de descargar el código QR de cada mascota desde la aplicación para poder imprimirlo o compartirlo fácilmente.
+
+### Historias de Usuario:
+
+#### Usuario No Registrado:
+1. Como usuario no registrado, quiero poder registrarme en la aplicación proporcionando mi información personal, para poder acceder a todas las funcionalidades de la aplicación.
+
+2. Como usuario no registrado, quiero poder iniciar sesión en la aplicación utilizando mi correo electrónico y contraseña, para poder acceder a mi cuenta.
+
+#### Usuario Registrado:
+3. Como usuario registrado, quiero poder agregar una nueva mascota a mi cuenta proporcionando su información básica y una foto, para mantener un registro de mis animales de compañía.
+
+4. Como usuario registrado, quiero que se genere automáticamente un código QR único para cada mascota que agregue a mi cuenta, para poder acceder fácilmente a la información de la mascota y compartirla con otros si es necesario.
+
+5. Como usuario registrado, quiero poder ver una lista de todas mis mascotas y acceder a la información detallada de cada una de ellas, incluyendo su foto, nombre, tipo, raza, edad y mi propia información de contacto.
+
+6. Como usuario registrado, quiero poder descargar el código QR de cada una de mis mascotas desde la aplicación, para poder imprimirlo o compartirlo fácilmente cuando sea necesario.
+
+### Notas Adicionales:
+- Se implementará una capa de autenticación para garantizar la seguridad de la información del usuario.
+- La aplicación seguirá los principios de diseño responsivo para garantizar una experiencia de usuario óptima en diferentes dispositivos y tamaños de pantalla.
+- Se utilizará encriptación para proteger la información confidencial, como contraseñas y datos personales de los usuarios.
