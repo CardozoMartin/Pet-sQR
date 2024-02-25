@@ -1,0 +1,27 @@
+{
+  "name": "servidor-petqr",
+  "version": "1.0.0",
+  "description": "app para encontrar mascotas",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=node --outfile=dist/index.cjs --minify",
+    "start": "node --env-file=.env dist/index.cjs",
+    "dev": "node --watch --env-file=.env src/index.js",
+    "lint": "eslint . --fix"
+  },
+  "keywords": [
+    "mascota",
+    "buscar",
+    "perdida",
+    "encontre"
+  ],
+  "author": "martin cardozo",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "moongose": "^1.0.0",
+    "morgan": "^1.10.0"
+  }
+}
