@@ -4,10 +4,13 @@ import bcrypt from 'bcryptjs';
 export const getUsers = async (_, res) => {
   try {
     const data = await UserModel.find({});
-    const filterData = data.map((user) => ({
-      ...user._doc,
-      password: undefined,
-    }));
+    const filterData = data
+      .filter((user) => user._dic.isActive === true)
+      .map((user) => ({
+        ...user._doc,
+        password: undefined,
+        isActive: undefined,
+      }));
     res.json({ data: filterData, message: 'Usuarios encontrados' });
   } catch (e) {
     res.status(500).json({
@@ -35,6 +38,65 @@ export const postUser = async (req, res) => {
     res.status(201).json({
       data: null,
       message: 'Registro exitoso',
+    });
+  } catch (e) {
+    if (e.message.includes('duplicate')) {
+      res.status(400).json({
+        data: null,
+        message: 'El email ya se encuentra registrado',
+      });
+      return;
+    }
+  }
+};
+
+export const putUser = async (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+
+  try {
+    const action = await UserModel.updateOne({ _id: id }, body);
+    if (action.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'No se encontro un usuario con ese id',
+      });
+      return;
+    }
+    res.json({
+      data: null,
+      message: 'Usuario editado exitosamente',
+    });
+  } catch (e) {
+    if (e.message.includes('duplicate')) {
+      res.status(400).json({
+        data: null,
+        message: 'El email ya se encuentra registrado',
+      });
+      return;
+    }
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const action = await UserModel.updateOne({ _id: id }, { isActive: false });
+    if (action.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'No se encontro un usuario con ese id',
+      });
+      return;
+    }
+    res.json({
+      data: null,
+      message: 'Usuario eliminado exitosamente',
     });
   } catch (e) {
     if (e.message.includes('duplicate')) {
