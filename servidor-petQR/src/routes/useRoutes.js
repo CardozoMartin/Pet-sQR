@@ -11,6 +11,7 @@ import {
   postUserSchema,
   putUserSchema,
 } from '../helpers/validationSchemas/userSchemaValidation.js';
+import { isAuthenticated } from '../middlewares/isAuthenticated.js';
 
 const router = express.Router();
 
@@ -22,9 +23,10 @@ router.post(
 );
 router.put(
   '/:id',
+  isAuthenticated,
   (res, req, next) => validateBody(req, res, next, putUserSchema),
   putUser,
 );
-router.delete('/:id', deleteUser);
+router.delete('/:id', isAuthenticated, deleteUser);
 
 export default router;
