@@ -5,7 +5,6 @@ export const getUsers = async (_, res) => {
   try {
     const data = await UserModel.find({});
     const filterData = data
-      .filter((user) => user._dic.isActive === true)
       .map((user) => ({
         ...user._doc,
         password: undefined,
@@ -31,6 +30,8 @@ export const postUser = async (req, res) => {
     direccion: body.direccion,
     numberphone: body.numberphone,
     password: hashPassword,
+    isActive: true,
+    isAdmin: false,
   });
 
   try {
