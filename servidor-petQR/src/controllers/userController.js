@@ -56,6 +56,11 @@ export const putUser = async (req, res) => {
     params: { id },
   } = req;
 
+  if (body.password) {
+    const hashPassword = bcrypt.hashSync(body.password, 10);
+    body.password = hashPassword;
+  }
+
   try {
     const action = await UserModel.updateOne({ _id: id }, body);
     if (action.matchedCount === 0) {
