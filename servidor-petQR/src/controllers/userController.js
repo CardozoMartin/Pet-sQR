@@ -4,12 +4,15 @@ import bcrypt from 'bcryptjs';
 export const getUsers = async (_, res) => {
   try {
     const data = await UserModel.find({});
-    const filterData = data
-      .map((user) => ({
-        ...user._doc,
-        password: undefined,
-        isActive: undefined,
-      }));
+    const filterData = data.map((user) => ({
+      id: user._doc._id,
+      firstname: user._doc.firstname,
+      lastname: user._doc.lastname,
+      email: user._doc.email,
+      direccion: user._doc.direccion,
+      numberphone: user._doc.numberphone,
+      isAdmin: user._doc.isAdmin,
+    }));
     res.json({ data: filterData, message: 'Usuarios encontrados' });
   } catch (e) {
     res.status(500).json({
