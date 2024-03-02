@@ -1,12 +1,24 @@
 import { useForm } from "react-hook-form";
 import Input from "../input/Input";
+import { useMutation } from "@tanstack/react-query";
+import { postUserFn } from "../../api/user";
 
 const FormRegister = () => {
   const { register, handleSubmit: onSubmitRHF } = useForm();
 
+  const {mutate: postUser} = useMutation({
+    mutationFn: postUserFn,
+    onSuccess:()=>{
+        alert("Registro exitoso")
+       
+    },
+    onError:()=>{}
+  })
+
   const handleSubmit = (data) => {
     //agregar spinner
-    console.log(data);
+    postUser({ ...data, isAdmin: false, isAuthenticated: false });
+    console.log(data)
   };
   return (
     <>
