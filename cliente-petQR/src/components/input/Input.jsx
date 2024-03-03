@@ -6,6 +6,7 @@ const Input = (props) => {
     options = {},
     register,
     className = "",
+id
   } = props;
   return (
     <fieldset className={`  ${className}`}>
@@ -15,9 +16,9 @@ const Input = (props) => {
       >
         <input
           type={type}
-          id={name}
+          id={id}
           placeholder={placeholder}
-          {...register(name, options)}
+          {...register(id, options)}
           className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
         />
 

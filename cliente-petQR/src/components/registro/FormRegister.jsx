@@ -31,6 +31,7 @@ const FormRegister = () => {
           register={register}
           placeholder="Nombre"
           type="text"
+          id="firstname"
           className="col-span-6 sm:col-span-3"
           options={{
             required: true,
@@ -43,6 +44,7 @@ const FormRegister = () => {
         <Input
           register={register}
           placeholder="Apellido"
+          id="lastname"
           type="text"
           className="col-span-6 sm:col-span-3"
           options={{
@@ -57,6 +59,7 @@ const FormRegister = () => {
           register={register}
           placeholder="Email"
           type="email"
+          id="email"
           className="col-span-6"
           options={{
             required: true,
@@ -69,6 +72,7 @@ const FormRegister = () => {
           register={register}
           placeholder="Direccion"
           type="text"
+          id="direccion"
           className="col-span-6 sm:col-span-3"
           options={{
             required: true,
@@ -81,6 +85,7 @@ const FormRegister = () => {
           register={register}
           placeholder="Telefono"
           type="text"
+          id="numberphone"
           className="col-span-6 sm:col-span-3"
           options={{
             required: true,
@@ -94,13 +99,14 @@ const FormRegister = () => {
           register={register}
           placeholder="Contraseña"
           type="password"
+          id="password"
           className="col-span-6 sm:col-span-3"
           options={{
             required: true,
             minLength: 4,
             maxLength: 6000,
           }}
-          name="Contraseña"
+          name="contraseña"
         />
 
         <fieldset className="col-span-6">
