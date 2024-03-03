@@ -14,7 +14,7 @@ const Router = () => {
     <>
      <BrowserRouter>
         <NavbarWithMegaMenu/>
-      <main className="mt-4">
+      <main className="bg-gray-100">
 
         <Routes>
           {/*<Route exact path="/" element={} />*/ }

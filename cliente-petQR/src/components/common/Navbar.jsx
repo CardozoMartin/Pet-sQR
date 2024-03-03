@@ -94,6 +94,7 @@ export function NavbarWithMegaMenu() {
             Registro
           </Button>
             </Link>
+            <Link to="/login">
           <Button
             variant="gradient"
             size="sm"
@@ -101,6 +102,7 @@ export function NavbarWithMegaMenu() {
           >
             Ingresar
           </Button>
+          </Link>
         </div>
         <IconButton
           variant="text"
