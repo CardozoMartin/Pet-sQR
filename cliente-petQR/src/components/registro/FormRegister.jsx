@@ -130,9 +130,9 @@ const FormRegister = () => {
           </button>
 
           <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-            Ya tienes cuenta?
+            Ya tienes cuenta?{" "}
             <button className="text-gray-700 underline font-bold ">
-              {" "}
+              {"  "}
               Iniciar
             </button>
             .
