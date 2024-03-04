@@ -6,6 +6,7 @@ import { NavbarWithMegaMenu } from "./components/common/Navbar"
 import InicioView from "./views/InicioView"
 import RegistroView from "./views/RegistroView"
 import LoginView from "./views/LoginView"
+import { ToastContainer } from "react-toastify"
 
 
 
@@ -26,6 +27,7 @@ const Router = () => {
 
         </Routes>
       </main>
+        <ToastContainer />
       <FooterWithSocialLinks></FooterWithSocialLinks>
       
       </BrowserRouter>

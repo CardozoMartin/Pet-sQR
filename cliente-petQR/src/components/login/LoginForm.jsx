@@ -1,22 +1,48 @@
 import { useForm } from "react-hook-form";
 import Input from "../input/Input";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { postLoginFn } from "../../api/auth";
 import { useSession } from "../../store/useSession";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
     const { login } = useSession();
+    const navigate = useNavigate();
   const { register, handleSubmit: onSubmitRHF } = useForm();
 
   const { mutate: postLogin, isLoading } = useMutation({
     mutationFn: postLoginFn,
     onSuccess:(data)=>{
-        alert("Ingresaste perrito malvado");
+        toast('🦄 Ingresaste con exito', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
         login(data)
+
+        navigate("/")
+
+      
     },
-    onError:()=>{
-        alert("ocurrio un error mi ray :(")
+    onError:(e)=>{
+        toast.error(e.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+            });
     }
   })
   const handleSubmit = (data) => {
