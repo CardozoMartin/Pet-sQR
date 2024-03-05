@@ -2,10 +2,11 @@ import {  Routes } from "react-router"
 import { BrowserRouter, Route } from "react-router-dom"
 
 import  { FooterWithSocialLinks } from "./components/common/Footer"
-import { NavbarWithMegaMenu } from "./components/common/Navbar"
+import NavBar from "./components/common/Navbar"
 import InicioView from "./views/InicioView"
 import RegistroView from "./views/RegistroView"
 import LoginView from "./views/LoginView"
+import { ToastContainer } from "react-toastify"
 
 
 
@@ -13,8 +14,8 @@ const Router = () => {
   return (
     <>
      <BrowserRouter>
-        <NavbarWithMegaMenu/>
-      <main className="mt-4">
+        <NavBar/>
+      <main className="bg-gray-100">
 
         <Routes>
           {/*<Route exact path="/" element={} />*/ }
@@ -26,6 +27,7 @@ const Router = () => {
 
         </Routes>
       </main>
+        <ToastContainer />
       <FooterWithSocialLinks></FooterWithSocialLinks>
       
       </BrowserRouter>
