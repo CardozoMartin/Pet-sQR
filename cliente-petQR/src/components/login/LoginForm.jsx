@@ -6,6 +6,7 @@ import { postLoginFn } from "../../api/auth";
 import { useSession } from "../../store/useSession";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
     const { login } = useSession();
@@ -15,16 +16,22 @@ const LoginForm = () => {
   const { mutate: postLogin, isLoading } = useMutation({
     mutationFn: postLoginFn,
     onSuccess:(data)=>{
-        toast('🦄 Ingresaste con exito', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+      Swal.close();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Bievenido",
+      });
         login(data)
 
         navigate("/")
@@ -32,21 +39,15 @@ const LoginForm = () => {
       
     },
     onError:(e)=>{
-        toast.error(e.message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
+      Swal.close();
+      toast.error(e.message);
     }
   })
   const handleSubmit = (data) => {
-    postLogin(data);
+    if (!isLoading) {
+      Swal.showLoading();
+      postLogin(data);
+    }
   };
 
   return (
