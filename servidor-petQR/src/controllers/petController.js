@@ -4,11 +4,8 @@ export const getPets = async (req, res) => {
   try {
     const data = await PetModel.find({});
 
-    // Imprime los datos de cada mascota en la consola para depurar
-    console.log(data);
-
     const petData = data.map((pet) => ({
-      id: pet._id, // Accede directamente a _id sin necesidad de _doc
+      id: pet._id,
       name: pet.name,
       tipo: pet.tipo,
       raza: pet.raza,
@@ -44,5 +41,33 @@ export const postPet = async (req, res) => {
       data: null,
       message: 'Ocurrio un error al guardar la mascota',
     });
+  }
+};
+
+export const putPet = async (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+
+  try {
+    const actionPet = await PetModel.updateOne({ _id: id }, body);
+    if (actionPet.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'No se encontro una mascota ese ID',
+      });
+      return;
+    }
+    res.json({
+      data: null,
+      message: 'Mascota editada con exito',
+    });
+  } catch (e) {
+    res.status(400).json({
+      data: null,
+      message: 'ocurrio un error al editar',
+    });
+    return;
   }
 };
