@@ -60,7 +60,7 @@ const NavBar = () => {
                 <div className="flex space-x-4">
                   <NavLink
                     className="hover:bg-gray-700 text-white rounded-md px-3 py-2 text-sm font-medium"
-                    to="/home"
+                    to="/"
                     aria-current="page"
                   >
                     Home

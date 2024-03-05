@@ -8,6 +8,6 @@ export const postPetSchema = Joi.object({
     .pattern(/^[a-zA-Z0-9-_ ]+$/),
   tipo: Joi.string()
     .required()
-    .valid('Perro', 'Gato', 'Conejo', 'Hamster', 'Ave'),
+    .valid('Perro', 'Gato', 'Conejo', 'Hamster', 'Caballo'),
   raza: Joi.string().optional().min(2).max(50),
 });
