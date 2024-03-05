@@ -68,6 +68,35 @@ export const putPet = async (req, res) => {
       data: null,
       message: 'ocurrio un error al editar',
     });
+    // eslint-disable-next-line no-useless-return
+    return;
+  }
+};
+
+export const deletePet = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const actionPet = await PetModel.updateOne({ _id: id });
+    if (actionPet.matchedCount === 0) {
+      res.status(400).json({
+        data: null,
+        message: 'No se encontro una mascota con ese Id',
+      });
+      return;
+    }
+    res.json({
+      data: null,
+      message: 'Mascota eliminada con exito',
+    });
+  } catch (e) {
+    res.status(400).json({
+      data: null,
+      message: 'Ocurrio un error al eliminar la mascota',
+    });
+    // eslint-disable-next-line no-useless-return
     return;
   }
 };
