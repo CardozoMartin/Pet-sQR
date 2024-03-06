@@ -18,7 +18,6 @@ const FormRegister = () => {
   const handleSubmit = (data) => {
     //agregar spinner
     postUser({ ...data, isAdmin: false, isAuthenticated: false });
-    console.log(data)
   };
   return (
     <>

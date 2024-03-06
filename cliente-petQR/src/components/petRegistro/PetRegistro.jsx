@@ -1,10 +1,23 @@
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { postPetFn } from "../../api/pet";
+import { useSession } from "../../store/useSession";
 
 const PetRegistro = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { user } = useSession();
+    console.log(user)
+    const { register, handleSubmit } = useForm();
+
+    const {mutate: postPet} = useMutation({
+        mutationFn: postPetFn,
+        onSuccess:()=>{alert("Mascota agregada con exito")},
+        onError:()=>{alert("ocurrio un error al cargar la mascota")}
+    })
 
     const onSubmit = (data) => {
-        console.log(data);
+        const petData = { ...data, userID: user.id };
+        postPet(petData);
+        
     };
 
     return (
@@ -40,7 +53,7 @@ const PetRegistro = () => {
                             {...register("tipo")}
                             className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                         >
-                            <option value="" disabled>
+                            <option >
                                 Seleccione el tipo de mascota
                             </option>
                             <option value="Perro">Perro</option>

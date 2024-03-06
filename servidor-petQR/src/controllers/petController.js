@@ -22,6 +22,7 @@ export const getPets = async (req, res) => {
 
 export const postPet = async (req, res) => {
   const { body } = req;
+  console.log(body)
 
   const newPet = new PetModel({
     name: body.name,
@@ -37,6 +38,7 @@ export const postPet = async (req, res) => {
       message: 'Mascota agregada con exito',
     });
   } catch (e) {
+    console.log(e);
     res.status(500).json({
       data: null,
       message: 'Ocurrio un error al guardar la mascota',
