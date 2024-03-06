@@ -11,3 +11,14 @@ export const postPetFn = async (data) => {
   }
   return data;
 };
+
+export const getPetFn = async () => {
+  const res = await fetch(`${API_URL}/pet`);
+
+  if (!res.ok) {
+    throw new Error("Ocurrio un error al obtener las mascotas");
+  }
+
+  const data = res.json();
+  return data;
+};

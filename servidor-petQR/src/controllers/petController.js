@@ -22,7 +22,7 @@ export const getPets = async (req, res) => {
 
 export const postPet = async (req, res) => {
   const { body } = req;
-  console.log(body)
+  console.log(body);
 
   const newPet = new PetModel({
     name: body.name,
