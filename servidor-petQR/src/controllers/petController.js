@@ -54,7 +54,7 @@ export const putPet = async (req, res) => {
     body,
     params: { id },
   } = req;
-
+console.log(body, id);
   try {
     const actionPet = await PetModel.updateOne({ _id: id }, body);
     if (actionPet.matchedCount === 0) {
@@ -83,7 +83,6 @@ export const deletePet = async (req, res) => {
     params: { id },
   } = req;
 
-  console.log(id);
 
   try {
     const actionPet = await PetModel.updateOne(

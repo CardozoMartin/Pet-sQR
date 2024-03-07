@@ -1,17 +1,28 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { postPetFn } from "../../api/pet";
+import { postPetFn, putPetFn } from "../../api/pet";
 import { useSession } from "../../store/useSession";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
+import { usePet } from "../../store/usePet";
 
 const PetRegistro = () => {
+  const { register, handleSubmit, reset, setValue } = useForm();
   const { user } = useSession();
+  const { pet , clearPet } = usePet();
 
-  const { register, handleSubmit, reset } = useForm();
+  const isEditing = !!pet;
+
+  if(isEditing){
+    setValue("name", pet.name);
+    setValue("tipo", pet.tipo);
+    setValue("raza", pet.raza);
+
+  }
+
 
   const queryClient = useQueryClient();
-
+// POST
   const { mutate: postPet } = useMutation({
     mutationFn: postPetFn,
     onSuccess: () => {
@@ -23,13 +34,35 @@ const PetRegistro = () => {
     },
     onError: () => {
         Swal.close();
-        toast.success("Ocurrio un error al eliminar la mascota");
+        toast.success("Ocurrio un error al crear la mascota");
     },
   });
+//EDIT
+const { mutate: putPet } = useMutation({
+  mutationFn: putPetFn,
+  onSuccess: () => {
+    Swal.close();
+    toast.success("Mascota editada con exito");
+    reset();
 
+    queryClient.invalidateQueries("pet");
+    clearPet();
+  },
+  onError: () => {
+      Swal.close();
+      toast.error("Ocurrio un error al editar la mascota");
+  },
+});
   const onSubmit = (data) => {
-    const petData = { ...data, userID: user.id };
+    Swal.showLoading();
+
+    if(isEditing){
+      putPet({...data, id: pet.id})
+    }else{
+      const petData = { ...data, userID: user.id };
     postPet(petData);
+    }
+    
   };
 
   return (

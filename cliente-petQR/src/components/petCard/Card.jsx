@@ -1,11 +1,14 @@
-import { Button } from "@material-tailwind/react";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { deletePetFn } from "../../api/pet";
+import { usePet } from "../../store/usePet";
 const Card = (props) => {
   const { pet } = props;
   const queryClient = useQueryClient();
+
+  const { setPetToEdit } = usePet();
 
   const { mutate: deletePet } = useMutation({
     mutationFn: deletePetFn,
@@ -35,6 +38,10 @@ const Card = (props) => {
       }
     });
   };
+
+  const handleEdit = ()=>{
+    setPetToEdit(pet)
+  }
 
   return (
     <section className="bg- text-white">
@@ -75,7 +82,8 @@ const Card = (props) => {
           Eliminar
         </button>
 
-        <button className="inline-block rounded border bg-yellow-600 border-current px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500 ms-1">
+        <button className="inline-block rounded border bg-yellow-600 border-current px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500 ms-1"
+        onClick={handleEdit}>
           Editar
         </button>
       </div>

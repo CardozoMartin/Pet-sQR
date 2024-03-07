@@ -29,7 +29,7 @@ export const deletePetFn = async (petId) => {
   const res = await fetch(`${API_URL}/pet/${petId}`, {
     method: "DELETE",
     headers: {
-      "Content-Type": "application/json", 
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
@@ -40,5 +40,23 @@ export const deletePetFn = async (petId) => {
     throw new Error(
       resData.message || "ocurrio un error al eliminar la mascota"
     );
+  }
+};
+
+export const putPetFn = async (petId) => {
+  const token = sessionStorage.getItem("token");
+
+  const res = await fetch(`${API_URL}/pet/${petId}`, {
+    method: "PUT",
+    body: JSON.stringify({ ...data, id: undefined }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const resData = await res.json();
+
+  if (!res.ok) {
+    throw new Error(resData.message || "Ocurrio un erro al editar la mascota");
   }
 };
