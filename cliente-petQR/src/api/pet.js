@@ -22,3 +22,23 @@ export const getPetFn = async () => {
   const data = res.json();
   return data;
 };
+
+export const deletePetFn = async (petId) => {
+  const token = sessionStorage.getItem("token");
+
+  const res = await fetch(`${API_URL}/pet/${petId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json", 
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const resData = await res.json();
+
+  if (!res.ok) {
+    throw new Error(
+      resData.message || "ocurrio un error al eliminar la mascota"
+    );
+  }
+};

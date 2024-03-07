@@ -7,6 +7,7 @@ import InicioView from "./views/InicioView"
 import RegistroView from "./views/RegistroView"
 import LoginView from "./views/LoginView"
 import { ToastContainer } from "react-toastify"
+import { Toaster } from "sonner"
 
 
 
@@ -27,7 +28,7 @@ const Router = () => {
 
         </Routes>
       </main>
-        <ToastContainer />
+      <Toaster position="top-right" richColors />
       <FooterWithSocialLinks></FooterWithSocialLinks>
       
       </BrowserRouter>

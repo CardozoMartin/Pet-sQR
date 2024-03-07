@@ -4,13 +4,15 @@ export const getPets = async (req, res) => {
   try {
     const data = await PetModel.find({});
 
-    const petData = data.map((pet) => ({
-      id: pet._id,
-      name: pet.name,
-      tipo: pet.tipo,
-      raza: pet.raza,
-      userID: pet.userID,
-    }));
+    const petData = data
+      .filter((pet) => pet._doc.isActive === true)
+      .map((pet) => ({
+        id: pet._id,
+        name: pet.name,
+        tipo: pet.tipo,
+        raza: pet.raza,
+        userID: pet.userID,
+      }));
     res.json({ data: petData, message: 'Mascotas encontradas' });
   } catch (e) {
     res.status(500).json({
@@ -29,6 +31,7 @@ export const postPet = async (req, res) => {
     tipo: body.tipo,
     raza: body.raza,
     userID: body.userID,
+    isActive: true,
   });
 
   try {
@@ -80,8 +83,13 @@ export const deletePet = async (req, res) => {
     params: { id },
   } = req;
 
+  console.log(id);
+
   try {
-    const actionPet = await PetModel.updateOne({ _id: id });
+    const actionPet = await PetModel.updateOne(
+      { _id: id, isActive: true },
+      { isActive: false },
+    );
     if (actionPet.matchedCount === 0) {
       res.status(400).json({
         data: null,
