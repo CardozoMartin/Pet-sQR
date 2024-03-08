@@ -45,10 +45,10 @@ export const deletePetFn = async (petId) => {
 
 export const putPetFn = async (petId) => {
   const token = sessionStorage.getItem("token");
-
-  const res = await fetch(`${API_URL}/pet/${petId}`, {
+  console.log(petId);
+  const res = await fetch(`${API_URL}/pet/${petId.id}`, { // Aquí usamos petId.id
     method: "PUT",
-    body: JSON.stringify({ ...data, id: undefined }),
+    body: JSON.stringify({ ...petId }),
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -57,6 +57,7 @@ export const putPetFn = async (petId) => {
   const resData = await res.json();
 
   if (!res.ok) {
-    throw new Error(resData.message || "Ocurrio un erro al editar la mascota");
+    throw new Error(resData.message || "Ocurrió un error al editar la mascota");
   }
 };
+

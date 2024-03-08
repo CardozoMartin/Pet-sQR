@@ -74,7 +74,9 @@ const { mutate: putPet } = useMutation({
 
         <form
           className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-          onSubmit={handleSubmit(onSubmit)}
+          enctype="multipart/form-data"
+          onSubmit={handleSubmit(onSubmit)
+          }
         >
           <p className="text-center text-lg font-medium">Completa los datos</p>
 
@@ -117,6 +119,18 @@ const { mutate: putPet } = useMutation({
               {...register("raza")}
               className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
               placeholder="Ingrese la raza de su mascota"
+            />
+          </div>
+          <div>
+            <label htmlFor="name" className="sr-only">
+              Imagen
+            </label>
+            <input
+              type="file"
+              id="image"
+              {...register("image")}
+              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              placeholder="Ingrese foto de la mascota"
             />
           </div>
 

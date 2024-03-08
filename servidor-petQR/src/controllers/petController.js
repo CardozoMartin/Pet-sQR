@@ -1,5 +1,5 @@
 import PetModel from '../models/petSchema.js';
-
+import multer from 'multer';
 export const getPets = async (req, res) => {
   try {
     const data = await PetModel.find({});
@@ -11,6 +11,7 @@ export const getPets = async (req, res) => {
         name: pet.name,
         tipo: pet.tipo,
         raza: pet.raza,
+        image: pet.image,
         userID: pet.userID,
       }));
     res.json({ data: petData, message: 'Mascotas encontradas' });
@@ -30,6 +31,7 @@ export const postPet = async (req, res) => {
     name: body.name,
     tipo: body.tipo,
     raza: body.raza,
+    image: body.image,
     userID: body.userID,
     isActive: true,
   });
@@ -54,7 +56,7 @@ export const putPet = async (req, res) => {
     body,
     params: { id },
   } = req;
-console.log(body, id);
+  console.log(body, id);
   try {
     const actionPet = await PetModel.updateOne({ _id: id }, body);
     if (actionPet.matchedCount === 0) {
@@ -82,7 +84,6 @@ export const deletePet = async (req, res) => {
   const {
     params: { id },
   } = req;
-
 
   try {
     const actionPet = await PetModel.updateOne(
