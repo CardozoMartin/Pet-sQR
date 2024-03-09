@@ -14,8 +14,7 @@ const Pet = new mongoose.Schema({
     require: true,
   },
   image: {
-    data: Buffer,
-    contentType: String,
+    type: String,
   },
   userID: {
     type: String,

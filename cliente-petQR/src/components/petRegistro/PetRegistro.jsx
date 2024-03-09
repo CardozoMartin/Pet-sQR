@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { usePet } from "../../store/usePet";
 
+
 const PetRegistro = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const { user } = useSession();
@@ -55,6 +56,7 @@ const { mutate: putPet } = useMutation({
 });
   const onSubmit = (data) => {
     Swal.showLoading();
+    
 
     if(isEditing){
       putPet({...data, id: pet.id})
@@ -74,7 +76,7 @@ const { mutate: putPet } = useMutation({
 
         <form
           className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
           onSubmit={handleSubmit(onSubmit)
           }
         >
@@ -125,13 +127,7 @@ const { mutate: putPet } = useMutation({
             <label htmlFor="name" className="sr-only">
               Imagen
             </label>
-            <input
-              type="file"
-              id="image"
-              {...register("image")}
-              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-              placeholder="Ingrese foto de la mascota"
-            />
+            <input type="file" id="image" name="image" />
           </div>
 
           <button

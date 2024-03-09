@@ -1,5 +1,6 @@
 import PetModel from '../models/petSchema.js';
 import multer from 'multer';
+import { uploadFile } from '../helpers/upload.js';
 export const getPets = async (req, res) => {
   try {
     const data = await PetModel.find({});
@@ -24,31 +25,25 @@ export const getPets = async (req, res) => {
 };
 
 export const postPet = async (req, res) => {
-  const { body } = req;
+  const body = req.body;
+  const imagen = req.files.image;
   console.log(body);
 
-  const newPet = new PetModel({
-    name: body.name,
-    tipo: body.tipo,
-    raza: body.raza,
-    image: body.image,
-    userID: body.userID,
-    isActive: true,
-  });
+  if (imagen && imagen.length > 0) {
+    const { downloadURL } = await uploadFile(imagen[0]);
 
-  try {
-    await newPet.save();
-    res.status(201).json({
-      data: null,
-      message: 'Mascota agregada con exito',
-    });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      data: null,
-      message: 'Ocurrio un error al guardar la mascota',
-    });
+    const newPet = await new PetModel({
+      name: body.name,
+      tipo: body.tipo,
+      raza: body.raza,
+      image: downloadURL,
+      userID: body.userID,
+      isActive: true,
+    }).save();
+
+    return res.status(200).json(newPet);
   }
+  return res.status(400).json({ message: 'faltaron datos' });
 };
 
 export const putPet = async (req, res) => {

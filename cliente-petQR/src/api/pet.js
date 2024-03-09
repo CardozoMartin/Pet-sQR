@@ -1,6 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const postPetFn = async (data) => {
+  console.log(data);
   const res = await fetch(`${API_URL}/pet`, {
     method: "POST",
     body: JSON.stringify(data),

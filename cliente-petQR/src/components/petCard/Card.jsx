@@ -63,7 +63,7 @@ const Card = (props) => {
           <div className="hidden sm:block sm:shrink-0">
             <img
               alt=""
-              src={pet.image['0']}
+              src={pet.image}
               className="size-16 rounded-lg object-cover shadow-sm"
             />
           </div>
