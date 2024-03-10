@@ -27,7 +27,8 @@ export const getPets = async (req, res) => {
 export const postPet = async (req, res) => {
   const body = req.body;
   const imagen = req.files.image;
-  console.log(body);
+
+  console.log(imagen);
 
   if (imagen && imagen.length > 0) {
     const { downloadURL } = await uploadFile(imagen[0]);
@@ -36,6 +37,9 @@ export const postPet = async (req, res) => {
       name: body.name,
       tipo: body.tipo,
       raza: body.raza,
+      direccion: body.direccion,
+      numberphone: body.numberphone,
+      content: body.content,
       image: downloadURL,
       userID: body.userID,
       isActive: true,
@@ -51,7 +55,8 @@ export const putPet = async (req, res) => {
     body,
     params: { id },
   } = req;
-  console.log(body, id);
+  console.log(body);
+  console.log(id)
   try {
     const actionPet = await PetModel.updateOne({ _id: id }, body);
     if (actionPet.matchedCount === 0) {

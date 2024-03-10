@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { postPetFn, putPetFn } from "../../api/pet";
@@ -6,65 +7,65 @@ import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { usePet } from "../../store/usePet";
 
-
 const PetRegistro = () => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const { user } = useSession();
-  const { pet , clearPet } = usePet();
+  const { pet, clearPet } = usePet();
+  const [image, setImage] = useState(null);
 
   const isEditing = !!pet;
 
-  if(isEditing){
+  if (isEditing) {
     setValue("name", pet.name);
     setValue("tipo", pet.tipo);
     setValue("raza", pet.raza);
-
   }
 
-
   const queryClient = useQueryClient();
-// POST
+
   const { mutate: postPet } = useMutation({
     mutationFn: postPetFn,
     onSuccess: () => {
       Swal.close();
-      toast.success("Mascota agregada con exito");
+      toast.success("Mascota agregada con éxito");
       reset();
-
       queryClient.invalidateQueries("pet");
     },
     onError: () => {
-        Swal.close();
-        toast.success("Ocurrio un error al crear la mascota");
+      Swal.close();
+      toast.error("Ocurrió un error al crear la mascota");
     },
   });
-//EDIT
-const { mutate: putPet } = useMutation({
-  mutationFn: putPetFn,
-  onSuccess: () => {
-    Swal.close();
-    toast.success("Mascota editada con exito");
-    reset();
 
-    queryClient.invalidateQueries("pet");
-    clearPet();
-  },
-  onError: () => {
+  const { mutate: putPet } = useMutation({
+    mutationFn: putPetFn,
+    onSuccess: () => {
       Swal.close();
-      toast.error("Ocurrio un error al editar la mascota");
-  },
-});
+      toast.success("Mascota editada con éxito");
+      reset();
+      queryClient.invalidateQueries("pet");
+      clearPet();
+    },
+    onError: () => {
+      Swal.close();
+      toast.error("Ocurrió un error al editar la mascota");
+    },
+  });
+
   const onSubmit = (data) => {
     Swal.showLoading();
-    
+    const petData = { ...data, userID: user.id, image };
 
-    if(isEditing){
-      putPet({...data, id: pet.id})
-    }else{
-      const petData = { ...data, userID: user.id };
-    postPet(petData);
+    if (isEditing) {
+      console.log(data)
+      putPet({ ...petData, id: pet.id });
+    } else {
+      postPet(petData);
     }
-    
+  };
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
   return (
@@ -77,8 +78,7 @@ const { mutate: putPet } = useMutation({
         <form
           className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
           encType="multipart/form-data"
-          onSubmit={handleSubmit(onSubmit)
-          }
+          onSubmit={handleSubmit(onSubmit)}
         >
           <p className="text-center text-lg font-medium">Completa los datos</p>
 
@@ -124,17 +124,59 @@ const { mutate: putPet } = useMutation({
             />
           </div>
           <div>
-            <label htmlFor="name" className="sr-only">
+            <label htmlFor="direccion" className="sr-only">
+              direccion
+            </label>
+            <input
+              type="text"
+              id="direccion"
+              {...register("direccion")}
+              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              placeholder="Ingrese la direccion de su mascota"
+            />
+          </div>
+          <div>
+            <label htmlFor="numberphone" className="sr-only">
+              Numero de Contacto
+            </label>
+            <input
+              type="text"
+              id="numberphone"
+              {...register("numberphone")}
+              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              placeholder="Ingrese la raza de su mascota"
+            />
+          </div>
+          <div>
+            <label htmlFor="content" className="sr-only">
+              Comentario
+            </label>
+            <input
+              type="text"
+              id="content"
+              {...register("content")}
+              className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              placeholder="Agregue alguna informacion especial"
+            />
+          </div>
+          <div>
+            <label htmlFor="image" className="sr-only">
               Imagen
             </label>
-            <input type="file" id="image" name="image" />
+            <input
+            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleImageChange}
+            />
           </div>
 
           <button
             type="submit"
             className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
           >
-            Agregar
+            {isEditing ? "Editar" : "Agregar"}
           </button>
         </form>
       </div>

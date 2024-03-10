@@ -1,15 +1,26 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const postPetFn = async (data) => {
-  console.log(data);
+  console.log(data)
+  const formData = new FormData();
+  formData.append("name", data.name);
+  formData.append("tipo", data.tipo);
+  formData.append("raza", data.raza);
+  formData.append("direccion", data.direccion);
+  formData.append("numberphone", data.numberphone);
+  formData.append("content", data.content);
+  formData.append("image", data.image);
+  formData.append("userID", data.userID);
+
   const res = await fetch(`${API_URL}/pet`, {
     method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-type": "application/json" },
+    body: formData,
   });
+
   if (!res.ok) {
-    throw new Error("Ocurrio un error al agregar una mascota");
+    throw new Error("Ocurrió un error al agregar una mascota");
   }
+
   return data;
 };
 
@@ -44,21 +55,31 @@ export const deletePetFn = async (petId) => {
   }
 };
 
-export const putPetFn = async (petId) => {
+export const putPetFn = async (petData) => {
   const token = sessionStorage.getItem("token");
-  console.log(petId);
-  const res = await fetch(`${API_URL}/pet/${petId.id}`, { // Aquí usamos petId.id
+
+  const formData = new FormData();
+  formData.append("id", petData.id);
+  formData.append("name", petData.name);
+  formData.append("tipo", petData.tipo);
+  formData.append("raza", petData.raza);
+  if (petData.image) {
+    formData.append("image", petData.image);
+  }
+
+  const res = await fetch(`${API_URL}/pet/${petData.id}`, {
     method: "PUT",
-    body: JSON.stringify({ ...petId }),
+    body: formData,
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
+
   const resData = await res.json();
 
   if (!res.ok) {
     throw new Error(resData.message || "Ocurrió un error al editar la mascota");
   }
 };
+
 
