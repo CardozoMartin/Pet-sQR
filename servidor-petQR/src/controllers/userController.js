@@ -1,5 +1,5 @@
-import UserModel from '../models/userSchema.js';
 import bcrypt from 'bcryptjs';
+import UserModel from '../models/userSchema.js';
 
 export const getUsers = async (_, res) => {
   try {
@@ -24,7 +24,6 @@ export const getUsers = async (_, res) => {
 
 export const postUser = async (req, res) => {
   const { body } = req;
-  console.log(body);
   const hashPassword = bcrypt.hashSync(body.password, 10);
 
   const newUser = new UserModel({
@@ -50,6 +49,7 @@ export const postUser = async (req, res) => {
         data: null,
         message: 'El email ya se encuentra registrado',
       });
+    // eslint-disable-next-line no-useless-return
       return;
     }
   }
@@ -85,6 +85,7 @@ export const putUser = async (req, res) => {
         data: null,
         message: 'El email ya se encuentra registrado',
       });
+    // eslint-disable-next-line no-useless-return
       return;
     }
   }
@@ -109,12 +110,11 @@ export const deleteUser = async (req, res) => {
       message: 'Usuario eliminado exitosamente',
     });
   } catch (e) {
-    if (e.message.includes('duplicate')) {
-      res.status(400).json({
-        data: null,
-        message: 'El email ya se encuentra registrado',
-      });
-      return;
-    }
+    res.status(400).json({
+      data: null,
+      message: 'Ocurrio un error al eliminar el usuario',
+    });
+    // eslint-disable-next-line no-useless-return
+    return;
   }
 };

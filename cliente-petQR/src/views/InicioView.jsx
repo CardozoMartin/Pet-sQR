@@ -1,8 +1,13 @@
+import PetGallery from "../components/petCard/PetGallery"
+import PetRegistro from "../components/petRegistro/PetRegistro"
 
 
 const InicioView = () => {
   return (
-    <div>InicioView</div>
+    <>
+    <PetRegistro></PetRegistro>
+    <PetGallery></PetGallery>
+    </>
   )
 }
 

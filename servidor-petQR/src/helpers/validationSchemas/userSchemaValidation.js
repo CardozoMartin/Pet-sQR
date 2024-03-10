@@ -12,6 +12,7 @@ export const postUserSchema = Joi.object({
       'string.max': 'El nombre no debe tener más de 50 caracteres',
       'any.required': 'El campo nombre es requerido',
     }),
+  // eslint-disable-next-line newline-per-chained-call
   lastname: Joi.string().trim().min(3).max(50).required().messages({
     'string.empty': 'El apellido es obligatorio',
     'string.min': 'El apellido debe tener al menos 3 caracteres',
@@ -73,6 +74,7 @@ export const putUserSchema = Joi.object({
       'string.max': 'El nombre no debe tener más de 50 caracteres',
       'any.required': 'El campo nombre es requerido',
     }),
+  // eslint-disable-next-line newline-per-chained-call
   lastname: Joi.string().trim().min(3).max(50).messages({
     'string.empty': 'El apellido es obligatorio',
     'string.min': 'El apellido debe tener al menos 3 caracteres',
@@ -119,6 +121,7 @@ export const putUserSchema = Joi.object({
       'any.required': 'El campo contraseña es requerido',
     }),
 }).custom((value, helper) => {
+  // eslint-disable-next-line object-curly-newline
   const { firstname, lastname, email, direccion, numerphone, password } = value;
 
   if ((!firstname, !lastname, !email, !direccion, !numerphone, !password)) {

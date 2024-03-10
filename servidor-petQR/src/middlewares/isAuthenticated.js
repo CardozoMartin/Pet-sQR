@@ -26,7 +26,7 @@ export const isAuthenticated = (req, res, next) => {
   } catch (e) {
     res.status(401).json({
       data: null,
-      message: 'Invalid or expired token',
+      message: 'Session expirada',
     });
   }
 };

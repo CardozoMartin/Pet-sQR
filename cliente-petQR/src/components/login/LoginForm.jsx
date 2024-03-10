@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 const LoginForm = () => {
     const { login } = useSession();
     const navigate = useNavigate();
-  const { register, handleSubmit: onSubmitRHF } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const { mutate: postLogin, isLoading } = useMutation({
     mutationFn: postLoginFn,
@@ -43,7 +43,7 @@ const LoginForm = () => {
       toast.error(e.message);
     }
   })
-  const handleSubmit = (data) => {
+  const onSubmit = (data) => {
     if (!isLoading) {
       Swal.showLoading();
       postLogin(data);
@@ -54,7 +54,7 @@ const LoginForm = () => {
     <form
       action="#"
       className="mx-auto mb-0 mt-8 max-w-md space-y-4"
-      onSubmit={onSubmitRHF(handleSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Input
         register={register}

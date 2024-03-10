@@ -19,6 +19,7 @@ if (token) {
 export const useSession = create((set) => ({
   user,
   isLoggedIn,
+  
   login: (newUser) => set({ user: newUser, isLoggedIn: true }),
   logout: () => {
     sessionStorage.removeItem('token');
