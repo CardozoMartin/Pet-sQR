@@ -4,8 +4,10 @@ import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { deletePetFn } from "../../api/pet";
 
+
 const Card = (props) => {
   const { pet } = props;
+  console.log(pet)
 
   const queryClient = useQueryClient();
 
@@ -44,17 +46,30 @@ const Card = (props) => {
 
   return (
     <section className="bg- text-white">
-      <div className="  overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
+      <div className="  overflow-hidden rounded-lg border border-black p-4 sm:p-6 lg:p-8">
         <span className=" inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
         <div className="sm:flex sm:justify-between sm:gap-4">
           <div>
             <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+              <span className="font-light text-gray-600">Nombre : </span>
               {pet.name}
             </h3>
 
             <p className="mt-1 text-xs font-medium text-gray-600">
-              {pet.raza} {pet.tipo}
+              <span className="font-light text-gray-600">Raza : </span>{pet.raza} 
+            </p>
+            <p className="mt-1 text-xs font-medium text-gray-600">
+              <span className="font-light text-gray-600">Tipo : </span>{pet.tipo} 
+              
+            </p>
+            <p className="mt-1 text-xs font-medium text-gray-600">
+              <span className="font-light text-gray-600">Direccion : </span>{pet.direccion} 
+              
+            </p>
+            <p className="mt-1 text-xs font-medium text-gray-600">
+              <span className="font-light text-gray-600">Numero de contacto : </span>{pet.numberphone} 
+              
             </p>
           </div>
 
@@ -67,15 +82,16 @@ const Card = (props) => {
           </div>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-6">
           <p className="text-pretty text-sm text-gray-500">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit
-            illum provident a, ipsa maiores deleniti consectetur nobis et eaque.
+            <span className="font-light text-gray-600">Informacion Addicional : </span>
+            {pet.content}
           </p>
+          
         </div>
 
         <button
-          className="inline-block rounded bg-red-600 px-4 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
+          className="inline-block rounded bg-red-600 px-4 py-3 mt-5 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
           onClick={handleDelete}
         >
           Eliminar

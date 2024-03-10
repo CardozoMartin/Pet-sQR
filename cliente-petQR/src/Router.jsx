@@ -8,6 +8,7 @@ import RegistroView from "./views/RegistroView"
 import LoginView from "./views/LoginView"
 import { ToastContainer } from "react-toastify"
 import { Toaster } from "sonner"
+import PetInfo from "./components/petCard/PetInfo"
 
 
 
@@ -24,6 +25,8 @@ const Router = () => {
           <Route exact path="/registro" element={<RegistroView/>}></Route>
 
           <Route exact path="/login" element={<LoginView/>}></Route>
+          <Route exact path="/info" element={<PetInfo/>}></Route>
+
 
 
         </Routes>

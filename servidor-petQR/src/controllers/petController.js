@@ -12,6 +12,9 @@ export const getPets = async (req, res) => {
         name: pet.name,
         tipo: pet.tipo,
         raza: pet.raza,
+        direccion: pet.direccion,
+        numberphone: pet.numberphone,
+        content: pet.content,
         image: pet.image,
         userID: pet.userID,
       }));

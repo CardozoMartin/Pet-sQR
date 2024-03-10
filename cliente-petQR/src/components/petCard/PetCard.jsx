@@ -22,6 +22,7 @@ const PetCard = (props) => {
             <Card pet={item} key={item.id}></Card>
           ))}
         </div>
+        
       </div>
     </div>
   );
