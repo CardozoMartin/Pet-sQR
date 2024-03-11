@@ -9,10 +9,12 @@ import LoginView from "./views/LoginView"
 import { ToastContainer } from "react-toastify"
 import { Toaster } from "sonner"
 import PetInfo from "./components/petCard/PetInfo"
+import { useSession } from "./store/useSession"
 
 
 
 const Router = () => {
+  const { user, isLoggedIn } = useSession();
   return (
     <>
      <BrowserRouter>
@@ -22,7 +24,7 @@ const Router = () => {
         <Routes>
           {/*<Route exact path="/" element={} />*/ }
           <Route exact path="/" element={<InicioView/>}></Route>
-          <Route exact path="/registro" element={<RegistroView/>}></Route>
+          <Route exact path="/registro" element={isLoggedIn ? <InicioView/> : <RegistroView/>}></Route>
 
           <Route exact path="/login" element={<LoginView/>}></Route>
           <Route exact path="/info" element={<PetInfo/>}></Route>
