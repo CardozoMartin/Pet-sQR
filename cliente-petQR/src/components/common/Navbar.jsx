@@ -1,11 +1,33 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
+import { useSession } from "../../store/useSession";
+import Swal from "sweetalert2";
+import { toast } from "sonner";
 
 const NavBar = () => {
+  const { isLoggedIn, logout, user } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Atencion",
+      text: "Estas por salir !!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si, salir",
+      cancelButtonText: "Cancel",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        toast.success("Session cerrada con exito");
+        logout();
+
+        Navigate("/login");
+      }
+    });
   };
   return (
     <header>
@@ -67,12 +89,6 @@ const NavBar = () => {
                   </NavLink>
 
                   <NavLink
-                    to="/login"
-                    className="text-gray-300 hover:bg-gray-700 active:text-black hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Ingresar
-                  </NavLink>
-                  <NavLink
                     to="/registro"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
@@ -95,15 +111,23 @@ const NavBar = () => {
 
               <div className="relative ml-3">
                 <div>
-                  <button
-                    type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <img className="h-8 w-8 rounded-full" src="" alt="" />
-                  </button>
+                  {!isLoggedIn ? (
+                    <Link
+                      to="/login"
+                      className="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                    >
+                      {" "}
+                      Ingresar
+                    </Link>
+                  ) : (
+                    <Link
+                      className="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                      onClick={handleLogout}
+                    >
+                      {" "}
+                      salir
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -123,12 +147,6 @@ const NavBar = () => {
               Home
             </NavLink>
 
-            <NavLink
-              to="/login"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Login
-            </NavLink>
             <NavLink
               to="/registro"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
