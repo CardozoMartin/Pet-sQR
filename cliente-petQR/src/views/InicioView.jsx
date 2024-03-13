@@ -1,5 +1,7 @@
 
 import { Link } from "react-router-dom";
+import Answer from "../components/home/Answer";
+import Contacto from "../components/home/Contacto";
 
 const InicioView = () => {
   
@@ -634,10 +636,10 @@ const InicioView = () => {
           </div>
         </div>
       </section>
-      <section className="bg-white pb-10  dark:bg-dark lg:pb-20 ">
+      <section className="bg-white pb-10  dark:bg-dark lg:pb-20 container">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap justify-center">
-          <div className="w-full px-4">
+          <div className="w-full px-4 container">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
               <span className="mb-2 block text-lg font-semibold text-primary">
                 PetsQR
@@ -728,6 +730,11 @@ const InicioView = () => {
           </div>
         </div>
       </div>
+    </section>
+
+    <section className="">
+      <Answer></Answer>
+      <Contacto></Contacto>
     </section>
     
       
