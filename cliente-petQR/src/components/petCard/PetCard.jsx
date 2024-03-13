@@ -3,10 +3,10 @@ import Card from "./Card";
 
 const PetCard = (props) => {
   const { pet } = props;
-  const { user, loading } = useSession();
+  const { user, loading, isLoggedIn } = useSession();
 
   // Verifica si el usuario está cargando o no está autenticado
-  if (loading || !user) {
+  if (loading || isLoggedIn) {
     return <div>Inicia sesión para ver las mascotas.</div>;
   }
 
