@@ -34,6 +34,16 @@ export const getPetFn = async () => {
   const data = res.json();
   return data;
 };
+export const getPetByIdFn = async (petid) => {
+  const res = await fetch(`${API_URL}/pet/${petid}`);
+
+  if (!res.ok) {
+    throw new Error("Ocurrio un error al obtener las mascotas");
+  }
+
+  const data = res.json();
+  return data;
+};
 
 export const deletePetFn = async (petId) => {
   const token = sessionStorage.getItem("token");

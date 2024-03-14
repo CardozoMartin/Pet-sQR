@@ -2,6 +2,7 @@ import express from 'express';
 
 import {
   deletePet,
+  getPetById,
   getPets,
   postPet,
   putPet,
@@ -13,6 +14,8 @@ import { upload } from '../database/multer.js';
 const router = express.Router();
 
 router.get('/', getPets);
+router.get('/:id', getPetById);
+
 router.post(
   '/',
   (res, req, next) => petValidateBody(req, res, next, postPetSchema),

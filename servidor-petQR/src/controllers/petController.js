@@ -27,6 +27,48 @@ export const getPets = async (req, res) => {
   }
 };
 
+export const getPetById = async (req, res) => {
+  try {
+    const petId = req.params.id; // Suponiendo que el id se pasa como parámetro en la URL
+    const pet = await PetModel.findById(petId);
+
+    if (!pet) {
+      return res.status(404).json({
+        data: null,
+        message: 'No se encontró ninguna mascota con el ID proporcionado',
+      });
+    }
+
+    if (!pet.isActive) {
+      return res.status(404).json({
+        data: null,
+        message: 'La mascota con el ID proporcionado no está activa',
+      });
+    }
+
+    const petData = {
+      id: pet._id,
+      name: pet.name,
+      tipo: pet.tipo,
+      raza: pet.raza,
+      direccion: pet.direccion,
+      numberphone: pet.numberphone,
+      content: pet.content,
+      image: pet.image,
+      userID: pet.userID,
+    };
+
+    res.json({ data: petData, message: 'Mascota encontrada' });
+  } catch (error) {
+    console.error('Error al obtener la mascota por ID:', error);
+    res.status(500).json({
+      data: null,
+      message: 'Ocurrió un error al obtener la mascota por ID',
+    });
+  }
+};
+
+
 export const postPet = async (req, res) => {
   const body = req.body;
   const imagen = req.files.image;
@@ -59,7 +101,7 @@ export const putPet = async (req, res) => {
     params: { id },
   } = req;
   console.log(body);
-  console.log(id)
+  console.log(id);
   try {
     const actionPet = await PetModel.updateOne({ _id: id }, body);
     if (actionPet.matchedCount === 0) {

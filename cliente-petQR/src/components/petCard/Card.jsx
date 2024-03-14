@@ -1,17 +1,14 @@
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { deletePetFn } from "../../api/pet";
-
+import QRCodeGenerator from "../QRCodeGenerator";
 
 const Card = (props) => {
   const { pet } = props;
-  console.log(pet)
+  console.log(pet);
 
   const queryClient = useQueryClient();
-
- 
 
   const { mutate: deletePet } = useMutation({
     mutationFn: deletePetFn,
@@ -42,8 +39,6 @@ const Card = (props) => {
     });
   };
 
-  
-
   return (
     <section className="bg- text-white">
       <div className="  overflow-hidden rounded-lg border border-black p-4 sm:p-6 lg:p-8">
@@ -57,19 +52,22 @@ const Card = (props) => {
             </h3>
 
             <p className="mt-1 text-xs font-medium text-gray-600">
-              <span className="font-light text-gray-600">Raza : </span>{pet.raza} 
+              <span className="font-light text-gray-600">Raza : </span>
+              {pet.raza}
             </p>
             <p className="mt-1 text-xs font-medium text-gray-600">
-              <span className="font-light text-gray-600">Tipo : </span>{pet.tipo} 
-              
+              <span className="font-light text-gray-600">Tipo : </span>
+              {pet.tipo}
             </p>
             <p className="mt-1 text-xs font-medium text-gray-600">
-              <span className="font-light text-gray-600">Direccion : </span>{pet.direccion} 
-              
+              <span className="font-light text-gray-600">Direccion : </span>
+              {pet.direccion}
             </p>
             <p className="mt-1 text-xs font-medium text-gray-600">
-              <span className="font-light text-gray-600">Numero de contacto : </span>{pet.numberphone} 
-              
+              <span className="font-light text-gray-600">
+                Numero de contacto :{" "}
+              </span>
+              {pet.numberphone}
             </p>
           </div>
 
@@ -84,10 +82,11 @@ const Card = (props) => {
 
         <div className="mt-6">
           <p className="text-pretty text-sm text-gray-500">
-            <span className="font-light text-gray-600">Informacion Addicional : </span>
+            <span className="font-light text-gray-600">
+              Informacion Addicional :{" "}
+            </span>
             {pet.content}
           </p>
-          
         </div>
 
         <button
@@ -97,7 +96,7 @@ const Card = (props) => {
           Eliminar
         </button>
 
-        
+        <QRCodeGenerator petId={pet.id} />
       </div>
     </section>
   );
