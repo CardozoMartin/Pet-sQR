@@ -88,17 +88,20 @@ const NavBar = () => {
                     Home
                   </NavLink>
 
-                  { !isLoggedIn && <NavLink
-              to="/registro"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Register
-            </NavLink>}
+                  {!isLoggedIn && (
+                    <NavLink
+                      to="/registro"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                    >
+                      Register
+                    </NavLink>
+                  )}
+                 
                   <NavLink
-                    to="/info"
+                    to="/mascotas"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
-                    infoQR
+                    MisMascotas
                   </NavLink>
                 </div>
               </div>
@@ -147,12 +150,20 @@ const NavBar = () => {
               Home
             </NavLink>
 
-            { !isLoggedIn && <NavLink
-              to="/registro"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Register
-            </NavLink>}
+            {!isLoggedIn && (
+              <NavLink
+                to="/registro"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+              >
+                Register
+              </NavLink>
+            )}
+             <NavLink
+                    to="/mascotas"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  >
+                    MisMascotas
+                  </NavLink>
           </div>
         </div>
       </nav>

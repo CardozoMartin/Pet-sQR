@@ -34,7 +34,7 @@ const Router = () => {
           <Route exact path="/infoPet" element={<PetIdView/>}></Route>
           <Route exact path="/Qr" element={<QRCodeGenerator/>}></Route>
           <Route exact path="/mascotas" element={<PetsView/>}></Route>
-
+          <Route exact path="/pet-details/:petId" element={<PetIdView/>}></Route>
 
 
 
