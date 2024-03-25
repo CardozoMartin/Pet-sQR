@@ -10,6 +10,9 @@ import { ToastContainer } from "react-toastify"
 import { Toaster } from "sonner"
 import PetInfo from "./components/petCard/PetInfo"
 import { useSession } from "./store/useSession"
+import PetIdView from "./views/PetIdView"
+import QRCodeGenerator from "./components/QRCodeGenerator"
+import PetsView from "./views/PetsView"
 
 
 
@@ -28,6 +31,12 @@ const Router = () => {
 
           <Route exact path="/login" element={<LoginView/>}></Route>
           <Route exact path="/info" element={<PetInfo/>}></Route>
+          <Route exact path="/infoPet" element={<PetIdView/>}></Route>
+          <Route exact path="/Qr" element={<QRCodeGenerator/>}></Route>
+          <Route exact path="/mascotas" element={<PetsView/>}></Route>
+          <Route exact path="/pet-details/:petId" element={<PetIdView/>}></Route>
+
+
 
 
 

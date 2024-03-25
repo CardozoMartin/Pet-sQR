@@ -18,7 +18,7 @@ const LoginView = () => {
       <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
         <img
           alt=""
-          src="https://previews.123rf.com/images/photodeti/photodeti1410/photodeti141000034/32324778-grupo-de-animales-dom%C3%A9sticos-junto-en-frente-aislado-en-el-fondo-blanco.jpg"
+          src="https://cdn.me-qr.com/n1ed/files/me-qr/%D0%A1%D0%BB%D0%BE%D0%B8%CC%86%2014.svg"
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
