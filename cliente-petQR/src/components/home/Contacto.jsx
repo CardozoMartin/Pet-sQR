@@ -25,11 +25,11 @@ const Contacto = () => {
       );
   };
   return (
-    <section className="relative z-10 overflow-hidden bg-white py-20 dark:bg-dark lg:py-[120px] container">
-      <div className="container mx-auto">
-        <div className="-mx-4 flex flex-wrap lg:justify-between">
+    <section className="relative z-10 overflow-hidden bg- py-20 dark:bg-dark lg:py-[120px] container mt-10">
+      <div className="container mx-auto mt-5">
+        <div className="-mx-4 flex flex-wrap lg:justify-between mt-5">
           <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
-            <div className="mb-12 max-w-[570px] lg:mb-0">
+            <div className="mb-12 max-w-[570px] lg:mb-0 mt-5">
               <span className="mb-4 block text-base font-semibold text-primary">
                 Contacto
               </span>
@@ -42,7 +42,7 @@ const Contacto = () => {
                 a mejorar, en forma de agradecimiento
               </p>
 
-              <div className="mb-8 flex w-full max-w-[370px]">
+              <div className="mb-8 flex w-full max-w-[370px]" data-aos="fade-right">
                 <div className="mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded bg-primary/5 text-primary sm:h-[70px] sm:max-w-[70px]">
                   <svg
                     width="32"
@@ -68,7 +68,7 @@ const Contacto = () => {
               </div>
             </div>
           </div>
-          <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
+          <div className="w-full px-4 lg:w-1/2 xl:w-5/12" data-aos="fade-left">
             <div className="relative rounded-lg bg-white p-8 shadow-lg dark:bg-dark-2 sm:p-12">
               <form ref={form} onSubmit={sendEmail}>
                 <div className="mb-6">

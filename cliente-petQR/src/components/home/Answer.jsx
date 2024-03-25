@@ -1,68 +1,54 @@
-import {
-    Accordion,
-    AccordionHeader,
-    AccordionBody,
-  } from "@material-tailwind/react";
-import { useState } from "react";
+
 
 
 
 const Answer = () => {
 
-    const [open, setOpen] = useState(1);
- 
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
+    
   return (
 
-    <section className="container text-center">
-        <h2 className="font-bold mb-3">
+<section className="mx-auto container">
 
-        Preguntas Frecuentes
-        </h2>
-        <>
-      <Accordion open={open === 1} className="mb-2 rounded-lg border border-blue-gray-100 px-4 text-center">
-        <AccordionHeader
-          onClick={() => handleOpen(1)}
-          className={`border-b-0 transition-colors text-center ${
-            open === 1 ? "text-blue-500 hover:!text-blue-700 text-center" : ""
-          }`}
-        >
-          Como funciona PetsQR
-        </AccordionHeader>
-        <AccordionBody className="pt-0 text-base font-normal">
-          PetsQR es una web que te permite registrar a tus mascotas y poder generar un codigo QR o un PetID.
-          Con el QR solamente escanear y ya podrias acceder a los datos de tu mascota y los datos tuyos para poder contactarte.
-          con el PetID deberas ingresar a la web y introducir el ID y ahi podras acceder a todos tus datos de contacto e informacion de tu mascotas.
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 2} className="mb-2 rounded-lg border border-blue-gray-100 px-4">
-        <AccordionHeader
-          onClick={() => handleOpen(2)}
-          className={`border-b-0 transition-colors ${
-            open === 2 ? "text-blue-500 hover:!text-blue-700" : ""
-          }`}
-        >
-          Si cambio alguna informacion de contacto debere generar nuevamente un ID o QR
-        </AccordionHeader>
-        <AccordionBody className="pt-0 text-base font-normal">
-          No tendrias que volver a cargar tus mascotas PetsQR te permite editar toda tu informacion todas las veces que necesites para mantener tu informacion actualizada para contactarte
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 3} className="rounded-lg border border-blue-gray-100 px-4">
-        <AccordionHeader
-          onClick={() => handleOpen(3)}
-          className={`border-b-0 transition-colors ${
-            open === 3 ? "text-blue-500 hover:!text-blue-700" : ""
-          }`}
-        >
-          Quienes pueden acceder a mi informacion personal ?
-        </AccordionHeader>
-        <AccordionBody className="pt-0 text-base font-normal text-ceter ">
-          La unica forma de poder ver tu informacion personal de contacto es atravez del QR o el PetID sin ninguno de estos nadie puede ver tu informacion personal
-        </AccordionBody>
-      </Accordion>
-    </>
-    </section>
+
+<div className="accordion" id="accordionExample">
+  <div className="accordion-item">
+    <h2 className="accordion-header">
+      <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div className="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+  <div className="accordion-item">
+    <h2 className="accordion-header">
+      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Accordion Item #2
+      </button>
+    </h2>
+    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div className="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+  <div className="accordion-item">
+    <h2 className="accordion-header">
+      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div className="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+</div>
+</section> 
  
   )
 }
